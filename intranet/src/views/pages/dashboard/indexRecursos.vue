@@ -1,5 +1,6 @@
 
 <template>
+
   <Layout>
   
     <PageHeader :title="title" :items="items" />
@@ -40,6 +41,11 @@ export default {
         }
       ]
     };
+  },
+  mounted(){
+    console.log("hola", window.location.pathname == "/indexRecursos")
+    // let user = JSON.parse(localStorage.getItem('user'));
+    
   }
 };
 </script>

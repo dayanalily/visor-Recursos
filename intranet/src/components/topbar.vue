@@ -163,7 +163,9 @@ export default {
       current_language: "en"
     };
   },
- 
+ mounted(){
+   const loggeduser = localStorage.getItem("user");
+ },
   methods: {
     iniciarSession(){
 router.push("login")
