@@ -235,7 +235,8 @@
     "recursos": {
       "text": "Recursos",
       "list": {
-        "crearRecursos": "Crear Recursos"
+        "verRecursos": "Ver Recursos",
+        "crearRecursos": "Agregar Recurso"
       }
     },
     "multilevel": {
