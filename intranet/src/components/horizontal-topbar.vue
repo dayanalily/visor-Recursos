@@ -5,16 +5,16 @@
       <div class="d-flex">
         <!-- LOGO -->
         <div class="navbar-brand-box">
-          <a href="index.html" class="logo logo-dark">
+          <a class="logo logo-dark">
             <span class="logo-sm">
               <img src="@/assets/images/logo-sm-st.png" alt height="50" />
             </span>
             <span class="logo-lg">
-              <img src="@/assets/images/logo-st.png" alt height="50" />
+              <img src="@/assets/images/logo-st-dark.png" alt height="50" />
             </span>
           </a>
 
-          <a href="index.html" class="logo logo-light">
+          <a class="logo logo-light">
             <span class="logo-sm">
               <img src="@/assets/images/logo-sm-st.png" alt height="50" />
             </span>

@@ -11,7 +11,7 @@
               <img src="@/assets/images/logo-sm-st.png" alt height="50" />
             </span>
             <span class="logo-lg">
-              <img src="@/assets/images/logo-st.png" alt height="50" />
+              <img src="@/assets/images/logo-st-dark.png" alt height="50" />
             </span>
           </a>
 
@@ -101,7 +101,7 @@
           <div ></div>
           <a class="dropdown-item text-danger" href="/logout">
             <i class="ri-shut-down-line align-middle mr-1 text-danger"></i>
-            Admin ST
+            Cerrar sesión
           </a>
         </b-dropdown>
 
@@ -114,13 +114,13 @@
             <i class="ri-settings-2-line toggle-right"></i>
           </button>
         </div>
-        <button
+        <!-- <button
             @click="iniciarSession"
             type="button"
             class="btn header-item btn-login right-bar-toggle waves-effect toggle-right"
           >
             Iniciar Sesión
-          </button>
+          </button> -->
       </div>
     </div>
   </header>
@@ -164,7 +164,7 @@ export default {
     };
   },
  mounted(){
-   const loggeduser = localStorage.getItem("user");
+
  },
   methods: {
     iniciarSession(){
@@ -212,13 +212,13 @@ router.push("login")
 </script>
 
 <style lang="scss" scoped>
-.notify-item {
-  .active {
-    color: #16181b;
-    background-color: #f8f9fa;
-  }
-}
-.btn-login {
-  display: none
-}
+// .notify-item {
+//   .active {
+//     color: #16181b;
+//     background-color: #f8f9fa;
+//   }
+// }
+// .btn-login {
+//   display: none
+// }
 </style>
