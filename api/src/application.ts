@@ -9,10 +9,12 @@ import {RestApplication} from '@loopback/rest';
 import {ServiceMixin} from '@loopback/service-proxy';
 import path from 'path';
 import {MySequence} from './sequence';
+import {AuthenticationComponent, registerAuthenticationStrategy} from '@loopback/authentication';
+import { AutoriceJwt } from './services/strategies.service';
 
 export {ApplicationConfig};
 
-export class ApiApplication extends BootMixin(
+export class ApivisorrecursoApplication extends BootMixin(
   ServiceMixin(RepositoryMixin(RestApplication)),
 ) {
   constructor(options: ApplicationConfig = {}) {
@@ -40,5 +42,8 @@ export class ApiApplication extends BootMixin(
         nested: true,
       },
     };
+
+    registerAuthenticationStrategy(this, AutoriceJwt)
+    this.component(AuthenticationComponent)
   }
 }

@@ -1,2 +1,2 @@
+export * from './users.model';
 
-export * from './usuario.model';
