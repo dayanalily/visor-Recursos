@@ -1,4 +1,3 @@
-
 <template>
   <header id="page-topbar">
     <div class="navbar-header">
@@ -10,7 +9,7 @@
               <img src="@/assets/images/logo-sm-st.png" alt height="50" />
             </span>
             <span class="logo-lg">
-              <img src="@/assets/images/logo-st-dark.png" alt height="50" />
+              <img src="@/assets/images/logo-st.png" alt height="50" />
             </span>
           </a>
 
@@ -19,7 +18,7 @@
               <img src="@/assets/images/logo-sm-st.png" alt height="50" />
             </span>
             <span class="logo-lg">
-              <img src="@/assets/images/logo-st.png" alt height="50" />
+              <img src="@/assets/images/logo-st-dark.png" alt height="50" />
             </span>
           </a>
         </div>
@@ -32,18 +31,9 @@
         >
           <i class="ri-menu-2-line align-middle"></i>
         </button>
-
-      
-
-        
       </div>
 
       <div class="d-flex">
-       
-
-    
-
-
         <div class="dropdown d-none d-lg-inline-block ml-1">
           <button
             type="button"
@@ -55,7 +45,15 @@
           </button>
         </div>
 
-
+        <div class="dropdown d-inline-block">
+          <button
+            type="button"
+            class="btn header-item noti-icon right-bar-toggle waves-effect toggle-right"
+            @click="toggleRightSidebar"
+          >
+            <i class="ri-settings-2-line toggle-right"></i>
+          </button>
+        </div>
         <b-dropdown
           right
           variant="black"
@@ -72,30 +70,18 @@
             <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
           </template>
           <!-- item-->
-        
 
           <a class="dropdown-item text-danger" href="/logout">
             <i class="ri-shut-down-line align-middle mr-1 text-danger"></i>
-           Admin ST
+            Cerrar sesión
           </a>
         </b-dropdown>
-
-        <div class="dropdown d-inline-block">
-          <button
-            type="button"
-            class="btn header-item noti-icon right-bar-toggle waves-effect toggle-right"
-            @click="toggleRightSidebar"
-          >
-            <i class="ri-settings-2-line toggle-right"></i>
-          </button>
-        </div>
       </div>
     </div>
   </header>
 </template>
 
 <script>
-
 import i18n from "../i18n";
 import { layoutComputed } from "@/state/helpers";
 
@@ -113,7 +99,7 @@ export default {
   computed: {
     ...layoutComputed,
   },
-  
+
   data() {
     return {
       languages: [

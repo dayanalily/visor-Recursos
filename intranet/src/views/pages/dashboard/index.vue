@@ -23,7 +23,7 @@ export default {
     <div class="row">
       <div class="col-xl-12">
         <b-tabs justified content-class="p-3 text-muted">
-          <b-tab active class="border-0">
+          <b-tab active>
             <template v-slot:title>
               <span class="d-inline-block d-sm-none">
                 <i class="fas fa-home"></i>
@@ -49,7 +49,7 @@ export default {
             <p>Aqui va el contenido de todos los tabs</p>
             <Stat />
           </b-tab>
-          <b-tab active class="border-0">
+          <b-tab>
             <template v-slot:title>
               <span class="d-inline-block d-sm-none">
                 <i class="fas fa-home"></i>
