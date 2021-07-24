@@ -171,6 +171,10 @@
 
 <script>
 import { required, email } from "vuelidate/lib/validators";
+import axios from "axios";
+ import api from  "../../../config/base.js";
+// import swal from "sweetalert2";
+// import { Utils } from "../mixins/utils";
 
 import {
   authMethods,
@@ -185,6 +189,9 @@ export default {
       password: "", //"123456",
       submitted: false,
     };
+  },
+  mounted(){
+    this.testApi();
   },
   computed: {
     notification() {
@@ -202,48 +209,56 @@ export default {
     ...authMethods,
     ...authFackMethods,
     ...notificationMethods,
+    testApi(){
+      axios.get("http://localhost:3000/ping").then(res => {
+        console.log(res.data)
+      })
+      
+    }
     // Try to log the user in with the username
     // and password they provided.
-    tryToLogIn() {
-      this.submitted = true;
-      // stop here if form is invalid
-      this.$v.$touch();
+    // tryToLogIn() {
+    //   this.submitted = true;
+    //   // stop here if form is invalid
+    //   this.$v.$touch();
 
-      if (this.$v.$invalid) {
-        return;
-      } else {
-        if (process.env.VUE_APP_DEFAULT_AUTH === "firebase") {
-          this.tryingToLogIn = true;
-          // Reset the authError if it existed.
-          this.authError = null;
-          return (
-            this.logIn({
-              email: this.email,
-              password: this.password,
-            })
-              // eslint-disable-next-line no-unused-vars
-              .then((token) => {
-                this.tryingToLogIn = false;
-                this.isAuthError = false;
-                // Redirect to the originally requested page, or to the home page
-                this.$router.push(
-                  this.$route.query.redirectFrom || { name: "home" }
-                );
-              })
-              .catch((error) => {
-                this.tryingToLogIn = false;
-                this.authError = error ? error : "";
-                this.isAuthError = true;
-              })
-          );
-        } else {
-          const { email, password } = this;
-          if (email && password) {
-            this.login({ email, password });
-          }
-        }
-      }
-    },
+    //   if (this.$v.$invalid) {
+    //     return;
+    //   } else {
+    //     if (process.env.VUE_APP_DEFAULT_AUTH === "firebase") {
+    //       this.tryingToLogIn = true;
+    //       // Reset the authError if it existed.
+    //       this.authError = null;
+    //       return (
+    //         this.logIn({
+    //           email: this.email,
+    //           password: this.password,
+    //         })
+    //           // eslint-disable-next-line no-unused-vars
+    //           .then((token) => {
+    //             this.tryingToLogIn = false;
+    //             this.isAuthError = false;
+    //             // Redirect to the originally requested page, or to the home page
+    //             this.$router.push(
+    //               this.$route.query.redirectFrom || { name: "home" }
+    //             );
+    //           })
+    //           .catch((error) => {
+    //             this.tryingToLogIn = false;
+    //             this.authError = error ? error : "";
+    //             this.isAuthError = true;
+    //           })
+    //       );
+    //     } else {
+    //       const { email, password } = this;
+    //       if (email && password) {
+    //         this.login({ email, password });
+    //       }
+    //     }
+    //   }
+    // },
+
+
   },
 };
 </script>
