@@ -21,7 +21,7 @@
                     id="name"
                     label-cols-md="4"
                     label-cols-lg="3"
-                    label="name del recurso"
+                    label="Nombre del recurso"
                     label-for="name"
                   >
                     <b-form-input
@@ -104,7 +104,7 @@
                   <b-form-group
                     label-cols-md="4"
                     label-cols-lg="3"
-                    label="name del tab"
+                    label="Nombre del tab"
                     label-for="tab"
                   >
                     <select class="custom-select" v-model="form.tab" required>
@@ -120,7 +120,7 @@
                     id="enlace"
                     label-cols-md="4"
                     label-cols-lg="3"
-                    label="enlace"
+                    label="URL"
                     label-for="enlace"
                   >
                     <b-form-input
@@ -141,13 +141,25 @@
                     <file-input v-on:update="updateImagen"></file-input>
                   </b-form-group>
 
-                  <button
-                    class="btn btn-primary float-right"
-                    @click="saveResources"
-                    type="submit"
-                  >
-                    Guardar recurso
-                  </button>
+                  <div class="row">
+                    <div class="col-6">
+                      <a
+                        class="btn btn-primary outline"
+                        href="/"
+                      >
+                        Volver
+                      </a>
+                    </div>
+                    <div class="col-6">
+                      <button
+                        class="btn btn-primary float-right"
+                        @click="saveResources"
+                        type="submit"
+                      >
+                        Guardar recurso
+                      </button>
+                    </div>
+                  </div>
                 </form>
               </div>
             </div>
@@ -165,6 +177,7 @@ import PageHeader from "@/components/page-header";
 import axios from "axios";
 import api from "../../../config/base.js";
 import swal from "sweetalert2";
+// import router from '../../../router';
 // import { Utils } from "../../../mixins/utils";
 /**
  * Dashboard component
@@ -211,6 +224,9 @@ export default {
    ***/
       this.form.imagen = img;
     },
+    // goback() {
+    //   this.$router.push("/");
+    // },
     saveResources() {
       console.log(api.api + "recursos");
 
@@ -227,6 +243,7 @@ export default {
           imagen: this.form.imagen,
         })
         .then((resp) => {
+          this.form = {};
           console.log("resp recursos", resp);
           if (resp) {
             this.$router.push("/");
@@ -243,7 +260,7 @@ export default {
             });
 
             Toast.fire({
-              icon: "error",
+              icon: "success",
               title: "Recurso guardado exitosamente",
             });
           }
@@ -272,3 +289,14 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.btn-primary.outline {
+ background-color: #ffffff;
+ color: #0ba6e2;
+ &:hover {
+   background-color: #e9f9ff;
+   border-color: #e9f9ff;
+ }
+}
+</style>
