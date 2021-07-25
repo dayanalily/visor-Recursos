@@ -62,29 +62,29 @@ export const Utils = () => {
         }
         return Fn2.validaRut(runFormated)
       },
-      numberFormat: (input) => {
-        if (input === undefined) return ''
-        input = input.toString().replace(/[^0-9\,]/g, '')
+      // numberFormat: (input) => {
+      //   if (input === undefined) return ''
+      //   input = input.toString().replace(/[^0-9\,]/g, '')
 
-        if (input !== '') {
-          input = input.toString().replace(/[,]/, '.')
-          input = parseFloat(input)
-          let aux_array = input.toString().split('.')
+      //   if (input !== '') {
+      //     input = input.toString().replace(/[,]/, '.')
+      //     input = parseFloat(input)
+      //     let aux_array = input.toString().split('.')
 
-          aux_array[0] = aux_array[0]
-            .toString()
-            .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
-          let output =
-            typeof aux_array[1] == 'undefined'
-              ? aux_array[0]
-              : aux_array[0] + ',' + aux_array[1]
-          output = output == '' ? 0 : output
+      //     aux_array[0] = aux_array[0]
+      //       .toString()
+      //       .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+      //     let output =
+      //       typeof aux_array[1] == 'undefined'
+      //         ? aux_array[0]
+      //         : aux_array[0] + ',' + aux_array[1]
+      //     output = output == '' ? 0 : output
 
-          return output
-        } else {
-          return ''
-        }
-      },
+      //     return output
+      //   } else {
+      //     return ''
+      //   }
+      // },
       numberClean: (input) => {
         input = input
           .toString()

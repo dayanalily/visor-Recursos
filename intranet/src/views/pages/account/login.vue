@@ -49,26 +49,26 @@
                         >
                           <div class="form-group auth-form-group-custom mb-4">
                             <i class="ri-mail-line auti-custom-input-icon"></i>
-                            <label for="email">Email</label>
+                            <label for="run">Rut</label>
                             <input
-                              type="email"
-                              v-model="email"
+                              type="text"
+                              v-model="run"
                               class="form-control"
-                              id="email"
-                              placeholder="Enter email"
+                              id="run"
+                              placeholder="Rut"
                               :class="{
-                                'is-invalid': submitted && $v.email.$error,
+                                'is-invalid': submitted && $v.run.$error,
                               }"
                             />
                             <div
-                              v-if="submitted && $v.email.$error"
+                              v-if="submitted && $v.run.$error"
                               class="invalid-feedback"
                             >
-                              <span v-if="!$v.email.required"
+                              <span v-if="!$v.run.required"
                                 >Correo es requerido.</span
                               >
-                              <span v-if="!$v.email.email"
-                                >Por favor introduzca un correo electrónico
+                              <span v-if="!$v.run.run"
+                                >Por favor introduzca un rut valido
                                 válido.</span
                               >
                             </div>
@@ -170,27 +170,32 @@
 </template>
 
 <script>
-import { required, email } from "vuelidate/lib/validators";
+import { required } from "vuelidate/lib/validators";
 import axios from "axios";
- import api from  "../../../config/base.js";
-// import swal from "sweetalert2";
-// import { Utils } from "../mixins/utils";
-
+import api from "../../../config/base.js";
+import swal from "sweetalert2";
+import { Utils } from "../../../mixins/utils";
+// import router from "../../../router/routes";
 import {
   authMethods,
   authFackMethods,
   notificationMethods,
 } from "@/state/helpers";
 
+// import router from "@/router";
+
 export default {
+  mixins: [Utils()],
+
   data() {
     return {
-      email: "", // "admin@themesdesign.in",
+      // email: "", // "admin@themesdesign.in",
       password: "", //"123456",
+      run: "", //"123456",
       submitted: false,
     };
   },
-  mounted(){
+  mounted() {
     this.testApi();
   },
   computed: {
@@ -202,61 +207,84 @@ export default {
     document.body.classList.add("auth-body-bg");
   },
   validations: {
-    email: { required, email },
+    run: { required },
     password: { required },
   },
   methods: {
     ...authMethods,
     ...authFackMethods,
     ...notificationMethods,
-    testApi(){
-      axios.get("http://localhost:3000/ping").then(res => {
-        console.log(res.data)
-      })
-      
-    }
-    // Try to log the user in with the username
-    // and password they provided.
-    // tryToLogIn() {
-    //   this.submitted = true;
-    //   // stop here if form is invalid
-    //   this.$v.$touch();
+    testApi() {
+      axios
+        .get(
+          api.api + "/ping"
+          // "http://localhost:3000/ping"
+        )
+        .then((res) => {
+          console.log("resp", res.data);
+        });
+    },
 
-    //   if (this.$v.$invalid) {
-    //     return;
-    //   } else {
-    //     if (process.env.VUE_APP_DEFAULT_AUTH === "firebase") {
-    //       this.tryingToLogIn = true;
-    //       // Reset the authError if it existed.
-    //       this.authError = null;
-    //       return (
-    //         this.logIn({
-    //           email: this.email,
-    //           password: this.password,
-    //         })
-    //           // eslint-disable-next-line no-unused-vars
-    //           .then((token) => {
-    //             this.tryingToLogIn = false;
-    //             this.isAuthError = false;
-    //             // Redirect to the originally requested page, or to the home page
-    //             this.$router.push(
-    //               this.$route.query.redirectFrom || { name: "home" }
-    //             );
-    //           })
-    //           .catch((error) => {
-    //             this.tryingToLogIn = false;
-    //             this.authError = error ? error : "";
-    //             this.isAuthError = true;
-    //           })
-    //       );
-    //     } else {
-    //       const { email, password } = this;
-    //       if (email && password) {
-    //         this.login({ email, password });
-    //       }
-    //     }
-    //   }
-    // },
+    tryToLogIn() {
+      this.submitted = true;
+      this.authError = null;
+      if ((this.run.length > 7) & (this.password.length > 3)) {
+        axios
+          .post(api.api + "login", {
+            run: this.runClean(this.run),
+            password: this.password,
+          })
+          .then((r) => {
+            sessionStorage.token = r.data.token;
+            localStorage.token = r.data.token;
+            sessionStorage.userId = r.data.data.id;
+            localStorage.userId = r.data.data.id;
+            sessionStorage.data = JSON.stringify(r.data.data);
+            localStorage.user = JSON.stringify(r.data.data);
+            this.tryingToRegister = false;
+            this.isRegisterError = false;
+            this.registerSuccess = true;
+             this.$router.push("/");
+          })
+          .catch((error) => {
+            console.log("day", error);
+            const Toast = swal.mixin({
+              toast: true,
+              position: "top-end",
+              showConfirmButton: false,
+              timer: 3000,
+              timerProgressBar: true,
+              didOpen: (toast) => {
+                toast.addEventListener("mouseenter", swal.stopTimer);
+                toast.addEventListener("mouseleave", swal.resumeTimer);
+              },
+            });
+
+            Toast.fire({
+              icon: "error",
+              title: "Usuario o Contraseña no validos",
+            });
+          });
+      } else {
+        // this.login({ run: this.run, password: this.password });
+        const Toast = swal.mixin({
+          toast: true,
+          position: "top-end",
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener("mouseenter", swal.stopTimer);
+            toast.addEventListener("mouseleave", swal.resumeTimer);
+          },
+        });
+
+        Toast.fire({
+          icon: "error",
+          title: "Favor ingrese usuario y clave validos",
+        });
+      }
+    },
 
 
   },
@@ -265,7 +293,6 @@ export default {
 
 <style>
 .home-btn {
-    display: none !important
+  display: none !important;
 }
-
 </style>
