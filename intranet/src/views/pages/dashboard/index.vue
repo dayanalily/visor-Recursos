@@ -31,8 +31,11 @@
             <!--ALL-->
             <div class="row">
               <div class="col-md-3" v-for="all in listAll" :key="all.id">
-                <div class="card card-data" @click="previsualizar(all)">
-                  <div class="card-body img-container">
+                <div class="card card-data">
+                  <div
+                    class="card-body img-container"
+                    @click="previsualizar(all)"
+                  >
                     <div class="media">
                       <div class="media-body overflow-hidden">
                         <img src="@/assets/images/logo-st-recursos.jpg" />
@@ -45,10 +48,15 @@
                     </div>
                   </div>
 
-                  <div class="card-body border-top">
+                  <div class="card-body border-top file-name-container">
                     <p class="text-truncate font-size-14 mb-0 font-weight-bold">
                       {{ all.name }}
                     </p>
+                    <i
+                      class="i-eliminar ri-delete-bin-line"
+                      v-if="deleteResource"
+                      @click="eliminarAll(all)"
+                    ></i>
                   </div>
                 </div>
               </div>
@@ -89,8 +97,11 @@
                 v-for="presentaciones in listPresentaciones"
                 :key="presentaciones.id"
               >
-                <div class="card card-data" @click="previsualizar(presentaciones)">
-                  <div class="card-body img-container">
+                <div class="card card-data">
+                  <div
+                    class="card-body img-container"
+                    @click="previsualizar(presentaciones)"
+                  >
                     <div class="media">
                       <div class="media-body overflow-hidden">
                         <img src="@/assets/images/logo-st-recursos.jpg" />
@@ -103,10 +114,15 @@
                     </div>
                   </div>
 
-                  <div class="card-body border-top">
+                  <div class="card-body border-top file-name-container">
                     <p class="text-truncate font-size-14 mb-0 font-weight-bold">
                       {{ presentaciones.name }}
                     </p>
+                    <i
+                      class="i-eliminar ri-delete-bin-line"
+                      v-if="deleteResource"
+                      @click="eliminarPresentaciones(presentaciones)"
+                    ></i>
                   </div>
                 </div>
               </div>
@@ -145,8 +161,11 @@
                 v-for="videos in listVideos"
                 :key="videos.id"
               >
-                <div class="card card-data" @click="previsualizar(videos)">
-                  <div class="card-body img-container">
+                <div class="card card-data">
+                  <div
+                    class="card-body img-container"
+                    @click="previsualizar(videos)"
+                  >
                     <div class="media">
                       <div class="media-body overflow-hidden">
                         <img src="@/assets/images/logo-st-recursos.jpg" />
@@ -159,10 +178,15 @@
                     </div>
                   </div>
 
-                  <div class="card-body border-top">
+                  <div class="card-body border-top file-name-container">
                     <p class="text-truncate font-size-14 mb-0 font-weight-bold">
                       {{ videos.name }}
                     </p>
+                    <i
+                      class="i-eliminar ri-delete-bin-line"
+                      v-if="deleteResource"
+                      @click="eliminarVideos(videos)"
+                    ></i>
                   </div>
                 </div>
               </div>
@@ -201,8 +225,11 @@
                 v-for="simuladores in listSimuladores"
                 :key="simuladores.id"
               >
-                <div class="card card-data" @click="previsualizar(simuladores)">
-                  <div class="card-body img-container">
+                <div class="card card-data">
+                  <div
+                    class="card-body img-container"
+                    @click="previsualizar(simuladores)"
+                  >
                     <div class="media">
                       <div class="media-body overflow-hidden">
                         <img src="@/assets/images/logo-st-recursos.jpg" />
@@ -215,10 +242,15 @@
                     </div>
                   </div>
 
-                  <div class="card-body border-top">
+                  <div class="card-body border-top file-name-container">
                     <p class="text-truncate font-size-14 mb-0 font-weight-bold">
                       {{ simuladores.name }}
                     </p>
+                    <i
+                      class="i-eliminar ri-delete-bin-line"
+                      v-if="deleteResource"
+                      @click="eliminarSimulador(simuladores)"
+                    ></i>
                   </div>
                 </div>
               </div>
@@ -236,7 +268,7 @@ import Layout from "../../layouts/main";
 // import Stat from "./widget";
 import axios from "axios";
 import api from "../../../config/base.js";
-// import swal from "sweetalert2";
+import swal from "sweetalert2";
 /**
  * Dashboard component
  */
@@ -259,13 +291,26 @@ export default {
       listSimuladores: [],
       searchSimuladores: [],
       title: "Recursos",
+      deleteResource: false,
     };
   },
   mounted() {
     this.getResources();
+    if (JSON.parse(localStorage.getItem("user"))) {
+      this.deleteResource = true;
+      console.log("te amo", JSON.parse(localStorage.getItem("user")));
+    }
   },
   methods: {
     getResources() {
+      this.listAll = [];
+      this.searchAll = [];
+      this.listPresentaciones = [];
+      this.searchPresentaciones = [];
+      this.listVideos = [];
+      this.searchVideos = [];
+      this.listSimuladores = [];
+      this.searchSimuladores = [];
       axios.get(api.api + "recursos").then((resp) => {
         resp.data.forEach((element) => {
           this.listAll.push(element);
@@ -347,11 +392,127 @@ export default {
         this.listSimuladores = arraySimuladoresTemp;
       }
     },
+    eliminarAll(all) {
+      axios.delete(api.api + "recursos/" + all.id).then((resp) => {
+        if (resp) {
+          this.getResources();
+          const Toast = swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener("mouseenter", swal.stopTimer);
+              toast.addEventListener("mouseleave", swal.resumeTimer);
+            },
+          });
+
+          Toast.fire({
+            icon: "error",
+            title: "Recurso eliminado exitosamente",
+          });
+        }
+        console.log(resp);
+      });
+    },
+    eliminarPresentaciones(presentaciones) {
+      axios.delete(api.api + "recursos/" + presentaciones.id).then((resp) => {
+        if (resp) {
+          this.getResources();
+        }
+        console.log(resp);
+        const Toast = swal.mixin({
+          toast: true,
+          position: "top-end",
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener("mouseenter", swal.stopTimer);
+            toast.addEventListener("mouseleave", swal.resumeTimer);
+          },
+        });
+
+        Toast.fire({
+          icon: "error",
+          title: "Recurso eliminado exitosamente",
+        });
+      });
+    },
+    eliminarVideos(videos) {
+      axios.delete(api.api + "recursos/" + videos.id).then((resp) => {
+        if (resp) {
+          this.getResources();
+        }
+        console.log(resp);
+        const Toast = swal.mixin({
+          toast: true,
+          position: "top-end",
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener("mouseenter", swal.stopTimer);
+            toast.addEventListener("mouseleave", swal.resumeTimer);
+          },
+        });
+
+        Toast.fire({
+          icon: "error",
+          title: "Recurso eliminado exitosamente",
+        });
+      });
+    },
+    eliminarSimulador(simuladores) {
+      axios.delete(api.api + "recursos/" + simuladores.id).then((resp) => {
+        if (resp) {
+          this.getResources();
+        }
+        console.log(resp);
+        const Toast = swal.mixin({
+          toast: true,
+          position: "top-end",
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener("mouseenter", swal.stopTimer);
+            toast.addEventListener("mouseleave", swal.resumeTimer);
+          },
+        });
+
+        Toast.fire({
+          icon: "error",
+          title: "Recurso eliminado exitosamente",
+        });
+      });
+    },
   },
 };
 </script>
 
 <style lang="scss">
+.file-name-container {
+  display: flex;
+  padding: 1.25rem 1.25rem 0.75rem 1.25rem;
+  p {
+    width: 90%;
+    margin-bottom: 0;
+  }
+  i {
+    width: 10%;
+    color: red;
+    opacity: 1;
+    transition: all ease 0.3s;
+    font-size: 1.1rem;
+    position: relative;
+    top: -4px;
+    &:hover {
+      opacity: 0.6;
+    }
+  }
+}
 .tab-content.p-3 {
   padding: 1rem 0 !important;
 }
@@ -364,20 +525,21 @@ export default {
 .card-data {
   .text-truncate {
     color: #303f48;
+    cursor: default;
   }
-  &:hover {
-    cursor: pointer;
-    .media-cover {
-      background-color: rgba(0, 0, 0, 0.5);
-      .i-container {
-        opacity: 1;
-        i {
-          color: #0ba6e2;
+  .img-container {
+    &:hover {
+      cursor: pointer;
+      .media-cover {
+        background-color: rgba(0, 0, 0, 0.5);
+        .i-container {
+          opacity: 1;
+          i {
+            color: #0ba6e2;
+          }
         }
       }
     }
-  }
-  .img-container {
     height: 150px;
     padding: 0 !important;
     display: flex;
