@@ -1,7 +1,7 @@
 <script>
 import { layoutMethods } from "@/state/helpers";
 /**
- * Right-sidebar 
+ * Right-sidebar
  */
 export default {
   data() {
@@ -91,17 +91,6 @@ export default {
               >Horizontal</b-form-radio
             >
           </b-form-radio-group>
-          <!-- Width -->
-          <h6 class="mt-3">Ancho</h6>
-          <hr class="mt-1" />
-          <b-form-radio-group
-            v-model="width"
-            stacked
-            @input="changeWidth($event)"
-          >
-            <b-form-radio value="fluid" class="mb-1">Liquido</b-form-radio>
-            <b-form-radio value="boxed">En caja</b-form-radio>
-          </b-form-radio-group>
 
           <!-- Sidebar -->
           <div v-if="layout === 'vertical'">
@@ -112,11 +101,9 @@ export default {
               stacked
               @input="changeType($event)"
             >
-              <b-form-radio value="dark" class="mb-1">Oscuro</b-form-radio>
-              <b-form-radio value="light" class="mb-1">Luz</b-form-radio>
-              <b-form-radio value="compact" class="mb-1">Compacto</b-form-radio>
+              <b-form-radio value="dark" class="mb-1">Claro</b-form-radio>
+              <b-form-radio value="light" class="mb-1">Oscuro</b-form-radio>
               <b-form-radio value="icon" class="mb-1">Icono</b-form-radio>
-              <b-form-radio value="colored">Colores</b-form-radio>
             </b-form-radio-group>
           </div>
 
@@ -129,25 +116,11 @@ export default {
               stacked
               @input="changeTopbartype($event)"
             >
-              <b-form-radio value="dark" class="mb-1">Dark</b-form-radio>
-              <b-form-radio value="light" class="mb-1">Light</b-form-radio>
+              <b-form-radio value="light" class="mb-1">Claro</b-form-radio>
+              <b-form-radio value="dark" class="mb-1">Oscuro</b-form-radio>
             </b-form-radio-group>
           </div>
-
-          <!-- Preloader -->
-          <h6 class="mt-3">Precargador</h6>
-          <hr class="mt-1" />
-
-          <b-form-checkbox
-            v-model="loader"
-            name="check-button"
-            switch
-            @input="changeloader"
-            >Precargador</b-form-checkbox
-          >
         </div>
-     
-      
       </div>
       <!-- end slimscroll-menu-->
     </div>

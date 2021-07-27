@@ -19,7 +19,7 @@ export default {
           dataLabels: {
             enabled: false
           },
-          colors: ["#5664d2"],
+          colors: ["#0ba6e2"],
           stroke: {
             lineCap: "round"
           },

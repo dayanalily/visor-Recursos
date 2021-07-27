@@ -64,6 +64,7 @@ export default {
                     this.$route.query.redirectFrom || { name: "home" }
                   );
                 }
+                
               })
               .catch(error => {
                 this.tryingToRegister = false;

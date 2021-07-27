@@ -21,7 +21,7 @@ export default {
             width: [3],
             curve: "smooth"
           },
-          colors: ["#5664d2"],
+          colors: ["#0ba6e2"],
           tooltip: {
             fixed: {
               enabled: false
@@ -58,7 +58,7 @@ export default {
             width: [3],
             curve: "smooth"
           },
-          colors: ["#5664d2"],
+          colors: ["#0ba6e2"],
           tooltip: {
             fixed: {
               enabled: false
@@ -91,7 +91,7 @@ export default {
             width: [3],
             curve: "smooth"
           },
-          colors: ["#5664d2"],
+          colors: ["#0ba6e2"],
           tooltip: {
             fixed: {
               enabled: false

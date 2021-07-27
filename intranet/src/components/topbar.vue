@@ -1,12 +1,10 @@
-
-
 <template>
   <header id="page-topbar">
     <div class="navbar-header">
       <div class="d-flex">
         <!-- LOGO -->
         <div class="navbar-brand-box">
-          <a  class="logo logo-dark">
+          <a class="logo logo-dark">
             <span class="logo-sm">
               <img src="@/assets/images/logo-sm-st.png" alt height="50" />
             </span>
@@ -20,7 +18,7 @@
               <img src="@/assets/images/logo-sm-st.png" alt height="50" />
             </span>
             <span class="logo-lg">
-              <img src="@/assets/images/logo-st.png" alt height="50" />
+              <img src="@/assets/images/logo-st-dark.png" alt height="50" />
             </span>
           </a>
         </div>
@@ -33,8 +31,6 @@
         >
           <i class="ri-menu-2-line align-middle"></i>
         </button>
-
-       
       </div>
 
       <div class="d-flex">
@@ -56,7 +52,11 @@
             <form class="p-3">
               <div class="form-group m-0">
                 <div class="input-group">
-                  <input type="text" class="form-control" placeholder="Search ..." />
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Search ..."
+                  />
                   <div class="input-group-append">
                     <button class="btn btn-primary" type="submit">
                       <i class="ri-search-line"></i>
@@ -68,8 +68,6 @@
           </div>
         </div>
 
-     
-
         <div class="dropdown d-none d-lg-inline-block ml-1">
           <button
             type="button"
@@ -80,31 +78,6 @@
           </button>
         </div>
 
-    
-        <b-dropdown
-          right
-          variant="black"
-          toggle-class="header-item"
-          class="d-inline-block user-dropdown"
-        >
-          <template v-slot:button-content>
-            <img
-              class="rounded-circle header-profile-user"
-                 src="@/assets/images/perfil-st.png"
-              alt="Header Avatar"
-            />
-            <span class="d-none d-xl-inline-block ml-1">  Admin ST</span>
-            <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
-          </template>
-          <!-- item logout-->
-        
-          <div ></div>
-          <a class="dropdown-item text-danger" href="/logout">
-            <i class="ri-shut-down-line align-middle mr-1 text-danger"></i>
-            Admin ST
-          </a>
-        </b-dropdown>
-
         <div class="dropdown d-inline-block">
           <button
             type="button"
@@ -114,21 +87,45 @@
             <i class="ri-settings-2-line toggle-right"></i>
           </button>
         </div>
-        <button
+
+        <b-dropdown
+          right
+          variant="black"
+          toggle-class="header-item"
+          class="d-inline-block user-dropdown"
+        >
+          <template v-slot:button-content>
+            <img
+              class="rounded-circle header-profile-user"
+              src="@/assets/images/perfil-st.png"
+              alt="Header Avatar"
+            />
+            <span class="d-none d-xl-inline-block ml-1"> Admin ST</span>
+            <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+          </template>
+          <!-- item logout-->
+
+          <div></div>
+          <a class="dropdown-item text-danger" href="/logout">
+            <i class="ri-shut-down-line align-middle mr-1 text-danger"></i>
+            Cerrar sesión
+          </a>
+        </b-dropdown>
+
+        <!-- <button
             @click="iniciarSession"
             type="button"
             class="btn header-item btn-login right-bar-toggle waves-effect toggle-right"
           >
             Iniciar Sesión
-          </button>
+          </button> -->
       </div>
     </div>
   </header>
 </template>
 <script>
-
 import i18n from "../i18n";
-import router from '@/router';
+import router from "@/router";
 
 export default {
   data() {
@@ -137,38 +134,36 @@ export default {
         {
           flag: require("@/assets/images/flags/us.jpg"),
           language: "en",
-          title: "English"
+          title: "English",
         },
         {
           flag: require("@/assets/images/flags/french.jpg"),
           language: "fr",
-          title: "French"
+          title: "French",
         },
         {
           flag: require("@/assets/images/flags/spain.jpg"),
           language: "es",
-          title: "spanish"
+          title: "spanish",
         },
         {
           flag: require("@/assets/images/flags/chaina.png"),
           language: "zh",
-          title: "Chinese"
+          title: "Chinese",
         },
         {
           flag: require("@/assets/images/flags/arabic.png"),
           language: "ar",
-          title: "Arabic"
-        }
+          title: "Arabic",
+        },
       ],
-      current_language: "en"
+      current_language: "en",
     };
   },
- mounted(){
-   const loggeduser = localStorage.getItem("user");
- },
+  mounted() {},
   methods: {
-    iniciarSession(){
-router.push("login")
+    iniciarSession() {
+      router.push("login");
     },
     toggleMenu() {
       this.$parent.toggleMenu();
@@ -206,19 +201,7 @@ router.push("login")
     setLanguage(locale) {
       i18n.locale = locale;
       this.current_language = i18n.locale;
-    }
-  }
+    },
+  },
 };
 </script>
-
-<style lang="scss" scoped>
-.notify-item {
-  .active {
-    color: #16181b;
-    background-color: #f8f9fa;
-  }
-}
-.btn-login {
-  display: none
-}
-</style>

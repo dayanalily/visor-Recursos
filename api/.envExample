@@ -5,6 +5,6 @@ AWS_REGION=us-west-1
 API_MAIL = https://dailydevsec.ipzmarketing.com/api/v1/send_emails
 API_MAIL_TOKEN = 5YkHs8y_RmAvgpz_EzzCtDanpzaEsxzuduxaHJVr
 API_MAIL_FROM = soporte@dailydevsec.com
-API_MAIL_FROM_NAME = Aplicacion Garden House
+API_MAIL_FROM_NAME = Aplicacion Visor Recurso
 API_MAIL_TO_DOCUMENTS = dayanalily22@gmail.com
 API_MAIL_TO_DOCUMENTS_NAME = Dayana Sanchez

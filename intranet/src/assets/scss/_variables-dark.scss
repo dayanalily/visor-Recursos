@@ -9,8 +9,8 @@ $sidebar-bg: #ffffff;
 $sidebar-menu-item-color: #74788d;
 $sidebar-menu-sub-item-color: #7c8a96;
 $sidebar-menu-item-icon-color: #505d69;
-$sidebar-menu-item-hover-color: #5664d2;
-$sidebar-menu-item-active-color: #5664d2;
+$sidebar-menu-item-hover-color: #0ba6e2;
+$sidebar-menu-item-active-color: #0ba6e2;
 $sidebar-width:  250px;
 $sidebar-collapsed-width:  70px;
 $sidebar-width-sm:  160px;
@@ -20,8 +20,8 @@ $sidebar-dark-bg: #ffffff;//#252b3b; //252b3b
 $sidebar-dark-menu-item-color: #8590a5;
 $sidebar-dark-menu-sub-item-color: #8590a5;
 $sidebar-dark-menu-item-icon-color: #8590a5;
-$sidebar-dark-menu-item-hover-color: #d7e4ec;
-$sidebar-dark-menu-item-active-color: #d7e4ec;
+$sidebar-dark-menu-item-hover-color: #a7bbc7;
+$sidebar-dark-menu-item-active-color: #0ba6e2;
 
 // Topbar - Deafult Light
 $header-height: 70px;
@@ -29,7 +29,7 @@ $header-bg: #272d3e;
 $header-item-color: #919bae;
 
 // Topbar - Dark
-$header-dark-bg: #5664d2;
+$header-dark-bg: #0ba6e2;
 $header-dark-item-color: #e9ecef;
 
 // Topbar Search
@@ -43,7 +43,7 @@ $footer-color: #919bae;
 // Horizontal nav
 $topnav-bg:   #282e3f;
 $menu-item-color: #919bae;
-$menu-item-active-color: #5664d2;
+$menu-item-active-color: #0ba6e2;
 
 // Right Sidebar
 $rightbar-width:  280px;
@@ -139,7 +139,7 @@ $colors: map-merge(
   $colors
 );
 
-$primary:       $purple;
+$primary:       #0ba6e2;
 $secondary:     $gray-600;
 $success:       $green;
 $info:          $cyan;
@@ -152,7 +152,7 @@ $theme-colors: ();
 // stylelint-disable-next-line scss/dollar-variable-default
 $theme-colors: map-merge(
   (
-    "primary":    $primary,
+    "primary":    #0ba6e2,
     "secondary":  $secondary,
     "success":    $success,
     "info":       $info,

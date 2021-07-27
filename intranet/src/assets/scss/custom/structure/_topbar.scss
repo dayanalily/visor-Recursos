@@ -122,6 +122,7 @@
     width: 36px;
     background-color: $gray-300;
     padding: 3px;
+    object-fit: cover;
 }
 
 .user-dropdown{
@@ -222,6 +223,7 @@ body[data-topbar="dark"] {
 
     .header-profile-user {
         background-color: rgba($white, 0.25);
+        object-fit: cover;
     }
     
     .noti-icon {
@@ -238,17 +240,17 @@ body[data-topbar="dark"] {
         display: block;
     }
 
-    .app-search {
+    // .app-search {
     
-        .form-control {
-            background-color: rgba($topbar-search-bg,0.07);
-            color: $white;
-        }
-        span,
-        input.form-control::-webkit-input-placeholder {
-            color: rgba($white,0.5);
-        }
-    }
+    //     .form-control {
+    //         background-color: rgba($topbar-search-bg,0.07);
+    //         color: $white;
+    //     }
+    //     span,
+    //     input.form-control::-webkit-input-placeholder {
+    //         color: rgba($white,0.5);
+    //     }
+    // }
 }
 
 body[data-sidebar="dark"] {
@@ -257,11 +259,11 @@ body[data-sidebar="dark"] {
     }
 
     .logo-dark {
-        display: none;
+        display: block;
     }
 
     .logo-light {
-        display: block;
+        display: none;
     }
 }
 
